@@ -98,7 +98,6 @@ StyleCopReport.xml
 
 # Docker
 .dockerignore
-Dockerfile
 
 # Logs
 logs/
