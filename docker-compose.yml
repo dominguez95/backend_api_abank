@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: admin123
       POSTGRES_DB: user_management
     ports:
-      - "5432:5432"
+      - "5535:5432"
     volumes:
       - ./bd/01_init.sql:/docker-entrypoint-initdb.d/01_init.sql
       - postgres_data:/var/lib/postgresql/data
