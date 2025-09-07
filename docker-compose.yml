@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: user_management
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./bd/01_init.sql:/docker-entrypoint-initdb.d/01_init.sql
+      - postgres_data:/var/lib/postgresql/data
+
+  seeder:
+    build:
+      context: ./bd
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    restart: "no"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: admin
+      DB_PASS: admin123
+      DB_NAME: user_management
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: WebApi/Dockerfile
+    depends_on:
+      - db
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=user_management;Username=admin;Password=admin123"
+      DOTNET_RUNNING_IN_CONTAINER: true
+      ASPNETCORE_URLS: "http://+:8080"
+      ASPNETCORE_ENVIRONMENT: "Development"
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
