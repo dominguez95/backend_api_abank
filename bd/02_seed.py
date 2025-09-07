@@ -3,6 +3,7 @@ import time
 import psycopg2
 from faker import Faker
 
+# Utilizo Faker para generar datos falsos
 fake = Faker()
 # Espera a que la base de datos esté lista
 while True:
