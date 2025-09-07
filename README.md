@@ -166,15 +166,15 @@ docker-compose up --build
 
 ### 🔐 Autenticación
 
-- `POST /api/v1/Auth/login` - Iniciar sesión
+- `POST /api/v1/auth/login` - Iniciar sesión
 
 ### 👥 Gestión de Usuarios
 
-- `GET /api/v1/Users` - Listar usuarios (paginado)
-- `GET /api/v1/Users/{id}` - Obtener usuario por ID
-- `POST /api/v1/Users` - Crear nuevo usuario
-- `PUT /api/v1/Users/{id}` - Actualizar usuario
-- `DELETE /api/v1/Users/{id}` - Eliminar usuario
+- `GET /api/v1/users` - Listar usuarios (paginado)
+- `GET /api/v1/users/{id}` - Obtener usuario por ID
+- `POST /api/v1/users` - Crear nuevo usuario
+- `PUT /api/v1/users/{id}` - Actualizar usuario
+- `DELETE /api/v1/users/{id}` - Eliminar usuario
 
 > 💡 **Tip**: Visita http://localhost:8080/swagger para probar todos los endpoints interactivamente.
 
@@ -318,10 +318,17 @@ docker-compose up --build
 
 ## 📄 Licencia {#licencia}
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+Este proyecto está bajo la [Licencia MIT](LICENSE).
+
+### 📋 Resumen de la Licencia MIT
+
+- ✅ **Uso comercial** permitido
+- ✅ **Modificación** permitida
+- ✅ **Distribución** permitida
+- ✅ **Uso privado** permitido
+- ❌ **Sin garantía** - se proporciona "tal como está"
+- ⚠️ **Incluir aviso de copyright** en todas las copias
+
+Para más detalles, consulta el archivo [LICENSE](LICENSE).
 
 ---
-
-⭐ **¿Te fue útil este proyecto?** ¡Dale una estrella en GitHub!
-
-📧 **¿Tienes preguntas?** Abre un issue en el repositorio.
