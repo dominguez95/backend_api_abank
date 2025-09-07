@@ -6,7 +6,8 @@ Sistema de gestión de usuarios desarrollado en .NET 8 con PostgreSQL, implement
 
 - [📖 Descripción](#descripcion)
 - [🏗️ Arquitectura](#arquitectura)
-- [🛠️ Tecnologías](#tecnologias)
+- [� Base de Datos](#base-de-datos)
+- [�🛠️ Tecnologías](#tecnologias)
 - [📋 Requisitos](#requisitos)
 - [🚀 Instalación y Configuración](#instalacion)
   - [1. Clonar el repositorio](#1-clonar-el-repositorio)
@@ -50,6 +51,60 @@ El proyecto sigue los principios de **Clean Architecture** organizado en las sig
 ├── 🏢 Domain/          # Entidades, Repositorios, Excepciones
 └── 🗄️ Infrastructure/  # Implementación de repositorios, contexto de BD
 ```
+
+## 💾 Base de Datos {#base-de-datos}
+
+### 🗄️ Configuración
+
+- **Motor**: PostgreSQL 16
+- **Schema**: `auth`
+- **Puerto**: 5432
+- **Base de datos**: `user_management`
+- **Usuario**: `admin`
+- **Contraseña**: `admin123`
+
+### 📊 Estructura de Scripts
+
+```
+📁 bd/
+├── 📀 01_init.sql    # Inicialización completa de la base de datos
+│   ├── Schema 'auth'
+│   ├── Extensión UUID (pgcrypto)
+│   ├── Tabla 'users'
+│   ├── Trigger para timestamps
+│   └── 2 usuarios predefinidos
+└── 🌱 02_seed.py     # Script Python para datos de prueba
+    ├── Conexión automática a PostgreSQL
+    ├── Generación con Faker
+    └── 25 usuarios adicionales
+```
+
+### 🔧 Tabla Users
+
+```sql
+CREATE TABLE auth.users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    nombres VARCHAR(255) NOT NULL,
+    apellidos VARCHAR(255) NOT NULL,
+    fecha_nacimiento DATE NOT NULL,
+    direccion TEXT NOT NULL,
+    password VARCHAR(120) NOT NULL,
+    telefono CHAR(8) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    estado CHAR(1) NOT NULL DEFAULT 'A',
+    fecha_creacion TIMESTAMP NULL,
+    fecha_modificacion TIMESTAMP NULL,
+    CONSTRAINT chk_estado CHECK (estado IN ('A','I'))
+);
+```
+
+### ⚡ Características
+
+- ✅ **IDs UUID**: Generación automática con `gen_random_uuid()`
+- ✅ **Triggers**: Actualizacion automática de timestamps
+- ✅ **Validaciones**: Constraint para estados válidos ('A', 'I')
+- ✅ **Índices**: Optimización para consultas frecuentes
+- ✅ **Datos iniciales**: 2 usuarios + 25 generados con Faker
 
 ## 🛠️ Tecnologías {#tecnologias}
 
